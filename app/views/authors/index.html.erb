@@ -2,20 +2,14 @@
   <h1>Authors</h1>
 </div>
 
-
 <p><a href="/authors/new" class="btn btn-primary">Add a New Author</a></p>
-
 
 <table class="table table-hover">
   <thead>
     <tr>
-
       <th>First Name</th>
-
       <th>Last Name</th>
-
       <th>Short Bio</th>
-
       <th></th>
       <th></th>
       <th></th>
@@ -23,50 +17,28 @@
   </thead>
 
   <tbody>
-    <% @authors.each do |author| %>
+    <% @authors.order("lastName asc").each do |author| %>
       <tr>
-
         <td><%= author.firstName %></td>
-
         <td><%= author.lastName %></td>
-
         <td><%= author.shortBio %></td>
+        <td><a href="/authors/<%= author.id %>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a></td>
 
-
-        <td>
-          <a href="/authors/<%= author.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
-
-        <% if current_user.present? %>
-          <% if (current_user.username == 'admin') %>
-          <td>
-            <a href="/authors/<%= author.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-          </td>
-          <% else %>
-          <td>
-          </td>
-          <% end %>
+        <% if (current_user.username == 'admin') %>
+          <td><a href="/authors/<%= author.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a></td>
+        <% else %>
+          <td></td>
         <% end %>
 
-        <% if current_user.present? %>
-          <% if (current_user.username == 'admin') %>
-          <td>
-            <a href="/delete_author/<%= author.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </td>
-          <% else %>
-          <td>
-          </td>
-          <% end %>
+        <% if (current_user.username == 'admin') %>
+          <td><a href="/delete_author/<%= author.id %>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+        <% else %>
+          <td></td>
         <% end %>
-        
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<%= paginate(@roles) %>

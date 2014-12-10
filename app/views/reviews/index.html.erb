@@ -9,87 +9,71 @@
 <table class="table table-hover">
   <thead>
     <tr>
-
       <th>Book</th>
-
       <th>Reviewer</th>
-
       <th>Summary</th>
-
-<!--       <th>Fullreview</th>
-
-      <th>Startdate</th>
-
-      <th>Enddate</th>
-
-      <th>Enlightenmentrating</th>
-
-      <th>Enjoymentrating</th> -->
-
       <th>Overall Rating</th>
-
       <th></th>
       <th></th>
       <th></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
 
-        <td><%= review.book.title %></td>
+    <% if params[:user_id].present? %>
+      <% User.find(params[:user_id]).reviews.order("created_at asc").each do |review| %>
+        <tr>
+          <td><%= review.book.title %></td>
+          <td><%= review.user.username %></td>
+          <td><%= review.summary %></td>
+          <td><%= review.overallRating %>/5</td>
+          <td><a href="/reviews/<%= review.id %>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a></td>
 
-        <td><%= review.user.username %></td>
-
-        <td><%= review.summary %></td>
-
-<!--         <td><%= review.fullReview %></td>
-
-        <td><%= review.startDate %></td>
-
-        <td><%= review.endDate %></td>
-
-        <td><%= review.enlightenmentRating %></td>
-
-        <td><%= review.enjoymentRating %></td> -->
-
-        <td><%= review.overallRating %></td>
-
-
-        <td>
-          <a href="/reviews/<%= review.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
-
-        <% if current_user.present? %>
-          <% if (current_user == review.user || current_user.username == 'admin') %>
-          <td>
-            <a href="/reviews/<%= review.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-          </td>
-          <% else %>
-          <td>
-          </td>
+          <% if current_user.present? %>
+            <% if (current_user == review.user || current_user.username == 'admin') %>
+              <td><a href="/reviews/<%= review.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a></td>
+            <% else %>
+              <td></td>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <% if current_user.present? %>
-          <% if (current_user == review.user || current_user.username == 'admin') %>
-          <td>
-            <a href="/delete_review/<%= review.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </td>
-          <% else %>
-          <td>
-          </td>
+          <% if current_user.present? %>
+            <% if (current_user == review.user || current_user.username == 'admin') %>
+              <td><a href="/delete_review/<%= review.id %>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+            <% else %>
+              <td></td>
+            <% end %>
           <% end %>
-        <% end %>
 
-      </tr>
+        </tr>
+      <% end %>
+
+    <% else %>
+    <% @reviews.joins(:book).order("title asc").each do |review| %>
+        <tr>
+          <td><%= review.book.title %></td>
+          <td><%= review.user.username %></td>
+          <td><%= review.summary %></td>
+          <td><%= review.overallRating %>/5</td>
+          <td><a href="/reviews/<%= review.id %>" class="btn btn-primary"><i class="fa fa-search-plus"></i></a></td>
+
+          <% if (current_user == review.user || current_user.username == 'admin') %>
+            <td>
+              <a href="/reviews/<%= review.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+            </td>
+          <% else %>
+            <td>
+            </td>
+          <% end %>
+
+          <% if (current_user == review.user || current_user.username == 'admin') %>
+            <td><a href="/delete_review/<%= review.id %>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+          <% else %>
+            <td></td>
+          <% end %>
+
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

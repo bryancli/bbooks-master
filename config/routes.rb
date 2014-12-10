@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   #   devise_scope :user do
   #     root "devise/registrations#new"
   #   end
@@ -12,11 +12,11 @@ Rails.application.routes.draw do
   # root "author#index"
 
   root "reviews#index"
-  
+
   # devise_scope :user do
   #   match '/sign-in' => "devise/sessions#new", :as => :login
   # end
-    
+
   devise_for :users
   # Routes for the Author resource:
   # CREATE

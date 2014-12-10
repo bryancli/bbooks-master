@@ -8,6 +8,7 @@
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
+
 (function ($) {
     var DEFAULT_MIN = 0;
     var DEFAULT_MAX = 5;
@@ -490,3 +491,5 @@
         }
     });
 }(jQuery));
+
+

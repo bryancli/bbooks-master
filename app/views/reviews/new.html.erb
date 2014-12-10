@@ -8,7 +8,11 @@
 <% end %>
 
 <div class="page-header">
-  <h1>Add Review</h1>
+  <% if params[:book_id].present? %>
+    <h1>Add Review for <%= Book.find(params[:book_id]).title %></h1>
+  <% else %>
+    <h1>Add New Review</h1>
+  <% end %>
 </div>
 
 <div class="row">
@@ -22,146 +26,101 @@
 
           <!-- Label and input for book_id -->
           <div class="form-group">
-
-            <label for="book_id" class="col-sm-2 control-label">
-              Book
-            </label>
-            <div class="col-sm-10">
-
-              <!-- <input type="text" id="book_id" name="book_id" placeholder="Book" class="form-control" value="<%= @review.book_id %>"> -->
-              <%= select_tag(:book_id, options_from_collection_for_select(Book.all, :id, :title, (@review.book_id)), :class => "form-control") %>
-
-            </div>
-
+            <% if params[:book_id].present? %>
+              <input type="hidden" id="book_id" name="book_id" placeholder="Book" class="form-control" value="<%= params[:book_id] %>">
+            <% else %>
+              <label for="book_id" class="col-sm-2 control-label">
+                Book
+              </label>
+              <div class="col-sm-10">
+              <%= select_tag(:book_id, options_from_collection_for_select(Book.all, :id, :title, (@review.book_id)), :class => "btn btn-default dropdown-toggle") %>
+              </div>
+            <% end %>
           </div>
-
 
           <!-- Label and input for user_id -->
 <!--           <div class="form-group">
-
             <label for="user_id" class="col-sm-2 control-label">
               User
             </label>
             <div class="col-sm-10"> -->
-
               <!--<input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @review.user_id %>"> -->
               <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
-
 <!--             </div>
-
           </div> -->
-
 
           <!-- Label and input for summary -->
           <div class="form-group">
-
             <label for="summary" class="col-sm-2 control-label">
               Summary
             </label>
             <div class="col-sm-10">
-
               <input type="text" id="summary" name="summary" placeholder="One-line Summary" class="form-control" value="<%= @review.summary %>">
-
             </div>
-
           </div>
-
 
           <!-- Label and input for fullReview -->
           <div class="form-group">
-
             <label for="fullReview" class="col-sm-2 control-label">
               Full Review
             </label>
             <div class="col-sm-10">
-
               <input type="text" id="fullReview" name="fullReview" placeholder="Full Review" class="form-control" value="<%= @review.fullReview %>">
-
             </div>
-
           </div>
-
 
           <!-- Label and input for startDate -->
           <div class="form-group">
-
             <label for="startDate" class="col-sm-2 control-label">
               Start Date
             </label>
             <div class="col-sm-10">
-
               <input type="date" id="startDate" name="startDate" placeholder="Date Started Reading" class="form-control" value="<%= @review.startDate %>">
-
             </div>
-
           </div>
-
 
           <!-- Label and input for endDate -->
           <div class="form-group">
-
             <label for="endDate" class="col-sm-2 control-label">
               End Date
             </label>
             <div class="col-sm-10">
-
               <input type="date" id="endDate" name="endDate" placeholder="Date Finished Reading" class="form-control" value="<%= @review.endDate %>">
-
             </div>
-
           </div>
-
 
           <!-- Label and input for enlightenmentRating -->
           <div class="form-group">
-
             <label for="enlightenmentRating" class="col-sm-2 control-label">
               Enlightenment Rating
             </label>
             <div class="col-sm-10">
-
               <!-- <input type="text" id="enlightenmentRating" name="enlightenmentRating" placeholder="Enlightenmentrating" class="form-control" value="<%= @review.enlightenmentRating %>"> -->
-
               <input id="enlightenmentRating" type="number" name="enlightenmentRating" class="rating" data-size="xs" value="<%= @review.enlightenmentRating %>" data-min="0" data-max="5" step="1" glyphicon="false" >
-
             </div>
-
           </div>
-
 
           <!-- Label and input for enjoymentRating -->
           <div class="form-group">
-
             <label for="enjoymentRating" class="col-sm-2 control-label">
               Enjoyment Rating
             </label>
             <div class="col-sm-10">
-
               <!-- <input type="text" id="enjoymentRating" name="enjoymentRating" placeholder="Enjoymentrating" class="form-control" value="<%= @review.enjoymentRating %>"> -->
-
               <input id="enjoymentRating" type="number" name="enjoymentRating" class="rating" data-size="xs" value="<%= @review.enjoymentRating %>" data-min="0" data-max="5" step="1" glyphicon="false" >
-
             </div>
-
           </div>
-
 
           <!-- Label and input for overallRating -->
           <div class="form-group">
-
             <label for="overallRating" class="col-sm-2 control-label">
               Overall Rating
             </label>
             <div class="col-sm-10">
-
               <!-- <input type="text" id="overallRating" name="overallRating" placeholder="Overallrating" class="form-control" value="<%= @review.overallRating %>"> -->
-
               <input id="overallRating" type="number" name="overallRating" class="rating" data-size="xs" value="<%= @review.overallRating %>" data-min="0" data-max="5" step="1" glyphicon="false" >
-
             </div>
-
           </div>
-
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -173,3 +132,5 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="/assets/star-rating.js"></script>

@@ -43,3 +43,6 @@ gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.g
 
 # devise
 gem 'devise'
+
+# page numbers
+gem 'kaminari'

@@ -1,26 +1,108 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<style type="text/css">
+  .notice, .alert { display: none;  }
+</style>
+
+<div class="background">
+</div>
+</br>
+<div class="row">
+  <div class="col-sm-8 col-xs-16">
+    <h1><span class="splash">Welcome to GoodReads</span><h1>
+    </br></a>
+    <h4><span class="splash">Share you reading experiences with your friends - and other fascinating people.</span><h4>
   </div>
+  <div class="col-sm-4 col-xs-8">
+    <div class ="panel panel-default">
+      <div class="panel-heading">
+        <h5>Log in</h5>
+      </div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, :class => "form-control"  %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+          <div class="field form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off", :class => "form-control"  %>
+          </div>
+
+          <% if devise_mapping.rememberable? -%>
+            <div class="field form-group">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end -%>
+
+          <div class="actions">
+            <%= f.submit "Log in" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div> 
+    </div> 
+
   </div>
+</div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+<div class="row">
+  <div class="col-sm-8 col-xs-16">
   </div>
-<% end %>
+  <div class="col-sm-4 col-xs-8">
+  </div>
+</div>
 
-<%= render "devise/shared/links" %>
+<div class="row">
+  <div class="col-sm-8 col-xs-16">
+  </div>
+  <div class="col-sm-4 col-xs-8">
+    <div class ="panel panel-default">
+      <div class="panel-heading">
+        <h5>Sign up</h5>
+      </div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field form-group">
+            <%= f.label :username %>
+            <%= f.text_field :username, autofocus: true, :class => "form-control" %>
+          </div>
+
+          <div class="field form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, :class => "form-control" %>
+          </div>
+
+          <div class="field form-group">
+            <%= f.label :password %>
+            <% if @validatable %>
+            <em>(<%= @minimum_password_length %> chars min.)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
+          </div>
+
+          <div class="field form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+

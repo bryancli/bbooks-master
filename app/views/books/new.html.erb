@@ -44,7 +44,7 @@
             <div class="col-sm-10">
 
               <!-- <input type="text" id="author" name="author" placeholder="Author" class="form-control" value="<%= @book.author %>"> -->
-              <%= select_tag(:author_id, options_from_collection_for_select(Author.all, :id, :fullName, (@book.author_id)), :class => "form-control") %>
+              <%= select_tag(:author_id, options_from_collection_for_select(Author.all, :id, :fullName, (@book.author_id)), :class => "btn btn-default dropdown-toggle") %>
 
             </div>
 
@@ -75,7 +75,7 @@
             <div class="col-sm-10">
 
               <!-- <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @book.category %>"> -->
-              <%= select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :category, (@book.category_id)), :class => "form-control") %>
+              <%= select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :category, (@book.category_id)), :class => "btn btn-default dropdown-toggle") %>
 
             </div>
 

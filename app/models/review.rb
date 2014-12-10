@@ -7,4 +7,5 @@ class Review < ActiveRecord::Base
 	validates :enlightenmentRating, :presence => true, :numericality => true
 	validates :enjoymentRating, :presence => true, :numericality => true
 	validates :overallRating, :presence => true, :numericality => true
+
 end

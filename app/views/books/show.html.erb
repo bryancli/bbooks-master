@@ -27,18 +27,17 @@
   <dd>
     <% @book.reviews.each do |review| %>
       <%= review.overallRating %>/5<a href="/reviews/<%= review.id %>"> <%= review.summary %></a> by <%= review.user.username %>
-    </br> 
+    </br>
     <% end %>
-    
-    <p><a href="/reviews/new" class="btn btn-primary">Add a New Review</a></p>
+    <p><a href="/reviews/new?book_id=<%= @book.id %>" class="btn btn-primary">Add a New Review</a></p>
   </dd>
 
   <dt>Similar Books</dt>
   <dd>
     <% @book.category.books.each do |book| %>
       <% if @book.id != book.id %>
-      <a href="/book/<%= book.id %>"> <%= book.title %></a>
-      </br>
+        <a href="/books/<%= book.id %>"> <%= book.title %></a>
+        </br>
       <% end %>
     <% end %>
 
