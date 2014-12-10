@@ -7,7 +7,7 @@
   <dt>Book</dt>
   <dd><%= @review.book.title %> by <%= @review.book.author.fullName %></dd>
 
-  <dt>User</dt>
+  <dt>Reviewer</dt>
   <dd><%= @review.user.username %></dd>
 
 <!--   <dt>Summary</dt>
@@ -39,7 +39,7 @@
       </br>
       <% end %>
     <% end %>
-    
+
     <p><a href="/reviews/new" class="btn btn-primary">Add a New Review</a></p>
   </dd>
 

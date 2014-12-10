@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @authors = Author.page(params[:page])
+    @authors = Author.order("lastName asc").page(params[:page]).per(10)
   end
 
   def show

@@ -15,39 +15,32 @@
       <th>Year</th>
       <th>Picture</th>
       <th></th>
+
+      <% if current_user.username == 'admin' %>
       <th></th>
       <th></th>
+      <% end %>
+
     </tr>
   </thead>
 
   <tbody>
-    <% @books.order("title asc").each do |book| %>
+    <% @books.each do |book| %>
       <tr>
         <td><%= book.author.fullName %></td>
         <td><%= book.title %></td>
         <td><%= book.category.category %></td>
         <td><%= book.year %></td>
-        <td><img src="<%= book.picture %>" alt="<%= book.title %>" style="80:px;height:120px"></td>
+        <td><img src="<%= book.picture %>" alt="<%= book.title %>" style="40:px;height:60px"></td>
         <td>
           <a href="/books/<%= book.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
           </a>
         </td>
-        <td>
-          <a href="/books/<%= book.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-        </td>
 
         <% if current_user.username == 'admin' %>
-        <td>
-          <a href="/delete_book/<%= book.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </td>
-        <% else %>
-          <td>
-          </td>
+        <td><a href="/books/<%= book.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a></td>
+        <td><a href="/delete_book/<%= book.id %>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
         <% end %>
 
       </tr>
@@ -55,3 +48,4 @@
   </tbody>
 </table>
 
+<%= paginate(@books) %>

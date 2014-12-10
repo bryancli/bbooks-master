@@ -38,39 +38,31 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <% if current_user.present? %>
+    <% if current_user.present? %>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
           <li><a href="/authors">Authors</a></li>
           <li><a href="/books">Books</a></li>
           <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-              Reviews <span class="caret"></span>
-            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Reviews <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation"><a role="menuitem" tabindex="-1" href="/reviews">All reviews</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="/reviews?user_id=<%= current_user.id %>">My reviews</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="/reviews/users/<%= current_user.id %>">My reviews</a></li>
           </ul>
-  </li>
-
-
-
-        <% if current_user.username == 'admin' %>
-          <li><a href="/categories">Categories</a></li>
-        <% end %>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_user.present? %>
-          <li><a href="/users/edit">Account (<%= current_user.username %>)</a></li>
-          <li><a href="/users/sign_out" data-method="delete">Sign out </a></li>
-<!--         <% else %>
-          <li><a href="/users/sign_up">Sign up</a></li>
-          <li><a href="/users/sign_in">Sign in</a></li> -->
+          </li>
+          <% if current_user.username == 'admin' %>
+            <li><a href="/categories">Categories</a></li>
           <% end %>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right extra-padding">
+            <li><a href="/users/edit">Account (<%= current_user.username %>)</a></li>
+            <li><a href="/users/sign_out" data-method="delete">Sign out </a></li>
+        </ul>
+
+      </div>
+    <% end %>
+    <!-- /.navbar-collapse -->
   </nav>
   <div class="container-fluid" >
     <% if notice.present? %>

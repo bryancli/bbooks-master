@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   # READ
   get('/reviews', { :controller => 'reviews', :action => 'index' })
+  get('/reviews/users/:id', { :controller => 'reviews', :action => 'user' })
   get('/reviews/:id', { :controller => 'reviews', :action => 'show' })
 
   # UPDATE

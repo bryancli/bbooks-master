@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @books = Book.all
+    @books = Book.joins(:author).order("lastName asc").order("title asc").page(params[:page]).per(10)
   end
 
   def show

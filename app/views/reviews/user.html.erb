@@ -20,7 +20,7 @@
   </thead>
   <tbody>
 
-    <% @reviews.each do |review| %>
+    <% @reviews_user.each do |review| %>
       <tr>
         <td><%= review.book.title %></td>
         <td><%= review.user.username %></td>
@@ -46,4 +46,4 @@
   </tbody>
 </table>
 
-<%= paginate(@reviews) %>
+<%= paginate(@reviews_user) %>
