@@ -15,5 +15,12 @@
   <dt>Short Bio</dt>
   <dd><%= @author.shortBio %></dd>
 
+  <dt>Books</dt>
+  <dd>
+    <% @author.books.each do |book| %>
+      <a href="/books/<%= book.id %>"> <%= book.title %></a>
+      </br>
+    <% end %>
+  </dd>
 
 </dl>
