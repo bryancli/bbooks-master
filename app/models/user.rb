@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :reviews
 
+  validates :email, :presence => true
+  validates :encrypted_password, :presence => true
+
+
 end

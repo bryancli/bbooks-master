@@ -27,7 +27,7 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td><%= book.author.fullName %></td>
+        <td><%= book.author.try(:fullName) %></td>
         <td><%= book.title %></td>
         <td><%= book.category.category %></td>
         <td><%= book.year %></td>

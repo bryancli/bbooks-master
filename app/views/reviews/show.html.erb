@@ -23,13 +23,16 @@
   <dd><%= @review.endDate %></dd>
 
   <dt>Enlightenment Rating</dt>
-  <dd><%= @review.enlightenmentRating %>/5</dd>
+  <dd><%= @review.enlightenmentRating.round(1) %>./5.0</dd>
 
   <dt>Enjoyment Rating</dt>
-  <dd><%= @review.enjoymentRating %>/5</dd>
+  <dd><%= @review.enjoymentRating.round(1) %>/5.0</dd>
 
   <dt>Overall Rating</dt>
-  <dd><%= @review.overallRating %>/5</dd>
+  <dd><%= @review.overallRating.round(1) %>/5.0</dd>
+
+  <dt>Average Rating</dt>
+  <dd><%= ((@review.overallRating + @review.enlightenmentRating + @review.enjoymentRating) / 3.0).round(1) %>/5.0</dd>
 
   <dt>Other Related Reviews</dt>
   <dd>
